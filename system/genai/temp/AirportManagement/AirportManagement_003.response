@@ -1,0 +1,44 @@
+{
+    "models": [
+        {
+            "classname": "Airport",
+            "code": "class Airport(Base):\n    \"\"\"\n    description: Represents an airport entity with its location details\n    \"\"\"\n\n    __tablename__ = 'airport'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    code = Column(String, nullable=False)\n    city = Column(String, nullable=False)\n    country = Column(String, nullable=False)\n",
+            "description": "Represents an airport entity with its location details",
+            "name": "Airport"
+        },
+        {
+            "classname": "Airplane",
+            "code": "class Airplane(Base):\n    \"\"\"\n    description: Represents an airplane with its capacity and airport of residence\n    \"\"\"\n\n    __tablename__ = 'airplane'\n\n    id = Column(Integer, primary_key=True)\n    model = Column(String, nullable=False)\n    seating_capacity = Column(Integer, nullable=False)\n    airport_id = Column(Integer, ForeignKey('airport.id'), nullable=False)\n    \n    passenger_count = Column(Integer, default=0, nullable=False)  # for count rule\n",
+            "description": "Represents an airplane with its capacity and airport of residence",
+            "name": "Airplane"
+        },
+        {
+            "classname": "Passenger",
+            "code": "class Passenger(Base):\n    \"\"\"\n    description: Represents a passenger with boarding flight and seat details\n    \"\"\"\n\n    __tablename__ = 'passenger'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    flight_id = Column(Integer, ForeignKey('flight.id'), nullable=False)\n    seat_number = Column(String, nullable=False)\n",
+            "description": "Represents a passenger with boarding flight and seat details",
+            "name": "Passenger"
+        },
+        {
+            "classname": "Flight",
+            "code": "class Flight(Base):\n    \"\"\"\n    description: Represents a flight connecting two airports with a scheduled time\n    \"\"\"\n\n    __tablename__ = 'flight'\n\n    id = Column(Integer, primary_key=True)\n    flight_number = Column(String, nullable=False)\n    airplane_id = Column(Integer, ForeignKey('airplane.id'), nullable=False)\n    departure_airport_id = Column(Integer, ForeignKey('airport.id'), nullable=False)\n    arrival_airport_id = Column(Integer, ForeignKey('airport.id'), nullable=False)\n    departure_time = Column(DateTime, nullable=False)\n    arrival_time = Column(DateTime, nullable=False)\n",
+            "description": "Represents a flight connecting two airports with a scheduled time",
+            "name": "Flight"
+        }
+    ],
+    "rules": [
+        {
+            "name": "Passenger Count Rule",
+            "description": "Calculate number of passengers on an airplane",
+            "use_case": "Ensure that the number of passengers does not exceed the airplane's seating capacity.",
+            "code": "Rule.count(derive=Airplane.passenger_count, as_count_of=Passenger)"
+        },
+        {
+            "name": "Passenger Capacity Constraint",
+            "description": "Ensure airplanes do not exceed their passenger capacity",
+            "use_case": "Validate the passenger count against capacity",
+            "code": "Rule.constraint(validate=Airplane,\n                as_condition=lambda row: row.passenger_count <= row.seating_capacity,\n                error_msg=\"Airplane passenger count ({row.passenger_count}) exceeds seating capacity ({row.seating_capacity})\")"
+        }
+    ],
+    "test_data": "from datetime import date\n\n# Create test data for Airport\nairport1 = Airport(name=\"JFK International\", code=\"JFK\", city=\"New York\", country=\"USA\")\nairport2 = Airport(name=\"Los Angeles International\", code=\"LAX\", city=\"Los Angeles\", country=\"USA\")\nairport3 = Airport(name=\"London Heathrow\", code=\"LHR\", city=\"London\", country=\"UK\")\nairport4 = Airport(name=\"Tokyo Narita\", code=\"NRT\", city=\"Tokyo\", country=\"Japan\")\n\n# Create test data for Airplane\nairplane1 = Airplane(model=\"Boeing 737\", seating_capacity=180, airport_id=1, passenger_count=2)\nairplane2 = Airplane(model=\"Airbus A380\", seating_capacity=500, airport_id=2, passenger_count=3)\nairplane3 = Airplane(model=\"Embraer 175\", seating_capacity=80, airport_id=1, passenger_count=1)\nairplane4 = Airplane(model=\"CRJ 900\", seating_capacity=90, airport_id=3, passenger_count=0)\n\n# Create test data for Flight\nflight1 = Flight(flight_number=\"A101\", airplane_id=1, departure_airport_id=1, arrival_airport_id=2, departure_time=date(2023, 11, 28), arrival_time=date(2023, 11, 28))\nflight2 = Flight(flight_number=\"B202\", airplane_id=2, departure_airport_id=3, arrival_airport_id=4, departure_time=date(2023, 11, 29), arrival_time=date(2023, 11, 29))\nflight3 = Flight(flight_number=\"C303\", airplane_id=3, departure_airport_id=2, arrival_airport_id=1, departure_time=date(2023, 11, 30), arrival_time=date(2023, 11, 30))\nflight4 = Flight(flight_number=\"D404\", airplane_id=4, departure_airport_id=4, arrival_airport_id=3, departure_time=date(2023, 12, 1), arrival_time=date(2023, 12, 1))\n\n# Create test data for Passenger\npassenger1 = Passenger(name=\"John Doe\", flight_id=1, seat_number=\"12A\")\npassenger2 = Passenger(name=\"Jane Smith\", flight_id=1, seat_number=\"14B\")\npassenger3 = Passenger(name=\"Ahmed Khan\", flight_id=2, seat_number=\"1A\")\npassenger4 = Passenger(name=\"Li Wei\", flight_id=2, seat_number=\"5C\")",
+    "name": "airport_management_system"
+}

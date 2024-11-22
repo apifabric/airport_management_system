@@ -1,0 +1,64 @@
+<o-form-layout-manager attr="Flight" mode="tab" title="FLIGHT">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="FlightTable" 
+            service="Flight" 
+            entity="Flight" 
+            title="FLIGHT"
+            keys="id"
+            columns="id;airplane_id;arrival_airport_id;departure_airport_id;flight_number;departure_time;arrival_time" 
+            header-actions="R;D"
+            visible-columns="id;airplane_id;arrival_airport_id;departure_airport_id;flight_number;departure_time;arrival_time"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="airplane_id" title="airplane_id">
+    <o-table-cell-renderer-service attr="airplane_id" 
+        service="Airplane" entity="AirplaneType" columns="id;id"
+        parent-keys="id:airplane_id"
+        value-column="id" keys="airplane_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="arrival_airport_id" title="arrival_airport_id">
+    <o-table-cell-renderer-service attr="arrival_airport_id" 
+        service="Airport" entity="AirportType" columns="id;name"
+        parent-keys="id:arrival_airport_id"
+        value-column="name" keys="arrival_airport_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="departure_airport_id" title="departure_airport_id">
+    <o-table-cell-renderer-service attr="departure_airport_id" 
+        service="Airport" entity="AirportType" columns="id;name"
+        parent-keys="id:departure_airport_id"
+        value-column="name" keys="departure_airport_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #flight_number attr="flight_number" title="flight_number" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #departure_time attr="departure_time" title="departure_time" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #arrival_time attr="arrival_time" title="arrival_time" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

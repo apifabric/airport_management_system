@@ -1,0 +1,111 @@
+{
+    "name": "Skyport International",
+    "logo": {
+        "Type": "Logo",
+        "name": "SkyportLogo.png",
+        "description": "Skyport International Logo featuring a stylized airplane and globe"
+    },
+    "sections": [
+        {
+            "title": "Welcome to Skyport International",
+            "subtitle": "Your Gateway to the World",
+            "name": "hero",
+            "label": "Home",
+            "content": "**Discover the world with ease and comfort from your very first step at Skyport International.**\n\nJoin us in experiencing seamless travel with our unparalleled services and facilities designed just for you.",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "AirportEntrance.png",
+                    "description": "The welcoming entrance of Skyport International with travelers."
+                }
+            ]
+        },
+        {
+            "title": "About Skyport International",
+            "subtitle": "Our Mission and Vision",
+            "name": "about",
+            "label": "About",
+            "content": "Skyport International is dedicated to transforming travel experiences by delivering exceptional customer service, cutting-edge technology, and unparalleled convenience. Our mission is to create a supportive and stress-free environment for every traveler.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Background",
+                    "name": "AboutBackground.png",
+                    "description": "Background image of an airplane taking off during sunset."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "World-Class Amenities and Convenience",
+            "name": "services",
+            "label": "Services",
+            "content": "- **Lounge Access:** Relax in our luxurious lounges with complimentary snacks and Wi-Fi.\n- **Fast Track Security:** Minimize waiting with our express security lanes.\n- **Shopping & Dining:** Enjoy a wide range of retail and culinary delights.\n- **Baggage Services:** Seamless and secure baggage handling services.\n\nDiscover more about our services here.",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "Promotional",
+                    "name": "Lounge.png",
+                    "description": "Image of the exclusive lounge area with comfortable seating and refreshments."
+                }
+            ]
+        },
+        {
+            "title": "Customer Experiences",
+            "subtitle": "What Our Travelers Say",
+            "name": "testimonials",
+            "label": "Testimonials",
+            "content": "\"Skyport has completely transformed my travel experience. Fast, efficient, and always a pleasure!\" - *Emily R.*\n\n\"From check-in to boarding, Skyport makes everything seamless and enjoyable!\" - *James K.*",
+            "order": 4,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "HappyCustomers.png",
+                    "description": "Smiling customers at the airport."
+                }
+            ]
+        },
+        {
+            "title": "Explore Our World",
+            "subtitle": "A Visual Journey",
+            "name": "gallery",
+            "label": "Gallery",
+            "content": "Take a visual tour of our facilities and see what makes Skyport International an exceptional airport destination.",
+            "order": 5,
+            "Type": "Gallery",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "Facility1.png",
+                    "description": "Image of spacious terminals with modern architecture."
+                },
+                {
+                    "Type": "Gallery",
+                    "name": "Facility2.png",
+                    "description": "Aerial view of Skyport International with planes on the runway."
+                }
+            ]
+        },
+        {
+            "title": "Get in Touch",
+            "subtitle": "We're Here to Help",
+            "name": "contact",
+            "label": "Contact",
+            "content": "**Contact Us for Any Queries:**\n\n- **Phone:** 1-800-555-5678\n- **Email:** support@skyportint.com  \n- **Address:** Skyport International, 123 Aviation Ave., Suite 456, City, Country\n\n*We value your feedback and look forward to assisting you with all your travel needs.*",
+            "order": 6,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "AirportMap.png",
+                    "description": "A map showing the location of Skyport International."
+                }
+            ]
+        }
+    ]
+}

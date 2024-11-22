@@ -1,0 +1,2 @@
+Error creating database from model: November 22, 2024 15:58:22
+name 'airport1' is not defined

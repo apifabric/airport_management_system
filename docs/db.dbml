@@ -1,0 +1,54 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+// Or, view in VSCode with extension: "DBML Live Preview"
+
+Project DBML {
+  Note: '''
+Airplane: Represents an airplane with its capacity and airport of residence
+Airport: Represents an airport entity with its location details
+Flight: Represents a flight connecting two airports with a scheduled time
+Passenger: Represents a passenger with boarding flight and seat details
+'''
+}
+
+Table Airplane {
+    id INTEGER [primary key]
+    model VARCHAR 
+    seating_capacity INTEGER 
+    airport_id INTEGER 
+    passenger_count INTEGER 
+    }
+
+Table Airport {
+    id INTEGER [primary key]
+    name VARCHAR 
+    code VARCHAR 
+    city VARCHAR 
+    country VARCHAR 
+    }
+
+Table Flight {
+    id INTEGER [primary key]
+    flight_number VARCHAR 
+    airplane_id INTEGER 
+    departure_airport_id INTEGER 
+    arrival_airport_id INTEGER 
+    departure_time DATETIME 
+    arrival_time DATETIME 
+    }
+
+Table Passenger {
+    id INTEGER [primary key]
+    name VARCHAR 
+    flight_id INTEGER 
+    seat_number VARCHAR 
+    }
+
+
+
+// Relationships
+    Ref: Airplane.(airport_id) < Airport.(id)
+    Ref: Flight.(airplane_id) < Airplane.(id)
+    Ref: Flight.(arrival_airport_id) < Airport.(id)
+    Ref: Flight.(departure_airport_id) < Airport.(id)
+    Ref: Passenger.(flight_id) < Flight.(id)

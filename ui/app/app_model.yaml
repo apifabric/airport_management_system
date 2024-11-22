@@ -1,0 +1,240 @@
+about:
+  date: November 22, 2024 15:58:54
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Airplane:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: airport_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: model
+      required: true
+      template: text
+      type: VARCHAR
+    - name: seating_capacity
+      required: true
+      template: integer
+      type: INTEGER
+    - name: passenger_count
+      required: true
+      template: integer
+      type: INTEGER
+    description: Represents an airplane with its capacity and airport of residence
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents an airplane with its capacity and airport of residence
+    label: Airplane
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - airplane_id
+      name: FlightList
+      resource: Flight
+    - direction: toone
+      fks:
+      - airport_id
+      name: airport
+      resource: Airport
+    type: Airplane
+  Airport:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: code
+      required: true
+      template: text
+      type: VARCHAR
+    - name: city
+      required: true
+      template: text
+      type: VARCHAR
+    - name: country
+      required: true
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents an airport entity with its location details
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents an airport entity with its location details
+    label: Airport
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - airport_id
+      name: AirplaneList
+      resource: Airplane
+    - direction: tomany
+      fks:
+      - arrival_airport_id
+      name: FlightList
+      resource: Flight
+    - direction: tomany
+      fks:
+      - departure_airport_id
+      name: departureFlightList
+      resource: Flight
+    type: Airport
+  Flight:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: airplane_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: arrival_airport_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: departure_airport_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: flight_number
+      required: true
+      template: text
+      type: VARCHAR
+    - name: departure_time
+      required: true
+      type: DATETIME
+    - name: arrival_time
+      required: true
+      type: DATETIME
+    description: Represents a flight connecting two airports with a scheduled time
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a flight connecting two airports with a scheduled time
+    label: Flight
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - flight_id
+      name: PassengerList
+      resource: Passenger
+    - direction: toone
+      fks:
+      - airplane_id
+      name: airplane
+      resource: Airplane
+    - direction: toone
+      fks:
+      - arrival_airport_id
+      name: arrival_airport
+      resource: Airport
+    - direction: toone
+      fks:
+      - departure_airport_id
+      name: departure_airport
+      resource: Airport
+    type: Flight
+  Passenger:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: flight_id
+      required: true
+      template: integer
+      type: INTEGER
+    - name: seat_number
+      required: true
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a passenger with boarding flight and seat details
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a passenger with boarding flight and seat details
+    label: Passenger
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - flight_id
+      name: flight
+      resource: Flight
+    type: Passenger
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

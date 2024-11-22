@@ -1,0 +1,172 @@
+about:
+  date: November 22, 2024 15:58:54
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 5
+  number_tables: 4
+info_toggle_checked: true
+resources:
+  Airplane:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: airport_id
+      required: true
+    - name: model
+      required: true
+    - name: seating_capacity
+      required: true
+    - name: passenger_count
+      required: true
+    description: Represents an airplane with its capacity and airport of residence
+    info_list: Represents an airplane with its capacity and airport of residence
+    tab_groups:
+    - direction: tomany
+      fks:
+      - airplane_id
+      name: FlightList
+      resource: Flight
+    - direction: toone
+      fks:
+      - airport_id
+      name: airport
+      resource: Airport
+    type: Airplane
+    user_key: id
+  Airport:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: code
+      required: true
+    - name: city
+      required: true
+    - name: country
+      required: true
+    - name: id
+    description: Represents an airport entity with its location details
+    info_list: Represents an airport entity with its location details
+    tab_groups:
+    - direction: tomany
+      fks:
+      - airport_id
+      name: AirplaneList
+      resource: Airplane
+    - direction: tomany
+      fks:
+      - arrival_airport_id
+      name: FlightList
+      resource: Flight
+    - direction: tomany
+      fks:
+      - departure_airport_id
+      name: departureFlightList
+      resource: Flight
+    type: Airport
+    user_key: name
+  Flight:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: airplane_id
+      required: true
+    - name: arrival_airport_id
+      required: true
+    - name: departure_airport_id
+      required: true
+    - name: flight_number
+      required: true
+    - name: departure_time
+      required: true
+      type: DATETIME
+    - name: arrival_time
+      required: true
+      type: DATETIME
+    description: Represents a flight connecting two airports with a scheduled time
+    info_list: Represents a flight connecting two airports with a scheduled time
+    tab_groups:
+    - direction: tomany
+      fks:
+      - flight_id
+      name: PassengerList
+      resource: Passenger
+    - direction: toone
+      fks:
+      - airplane_id
+      name: airplane
+      resource: Airplane
+    - direction: toone
+      fks:
+      - arrival_airport_id
+      name: arrival_airport
+      resource: Airport
+    - direction: toone
+      fks:
+      - departure_airport_id
+      name: departure_airport
+      resource: Airport
+    type: Flight
+    user_key: id
+  Passenger:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: flight_id
+      required: true
+    - name: seat_number
+      required: true
+    - name: id
+    description: Represents a passenger with boarding flight and seat details
+    info_list: Represents a passenger with boarding flight and seat details
+    tab_groups:
+    - direction: toone
+      fks:
+      - flight_id
+      name: flight
+      resource: Flight
+    type: Passenger
+    user_key: name
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'
